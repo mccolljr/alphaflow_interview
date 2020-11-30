@@ -1,0 +1,29 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  test:
+    cmds:
+      - go test -v ./...
+
+  start:
+    cmds:
+      - go run .
+
+  migrate:reset:
+    cmds:
+      - migrate -database sqlite3://secret/dev.db -path ./migrations drop
+      - task: migrate:up
+
+  migrate:up:
+    cmds:
+      - migrate -database sqlite3://secret/dev.db -path ./migrations up
+
+  migrate:down:
+    cmds:
+      - migrate -database sqlite3://secret/dev.db -path ./migrations down
+
+  migrate:new:
+    cmds:
+      - migrate create -dir ./migrations -ext sql $NAME

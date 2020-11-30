@@ -28,16 +28,6 @@ func (c *AlphaFlow) Init(w http.ResponseWriter, r *http.Request) {
 	/* TODO: initialize context */
 }
 
-// Guard all routes
-func (c *AlphaFlow) GUARD_() {
-	c.loadUserFromToken()
-}
-
-// Guard API
-func (c *AlphaFlow) GUARD_API() {
-	c.requireUser()
-}
-
 // GET /health
 func (c *AlphaFlow) GET_Health() {
 	attache.RenderJSON(

@@ -7,8 +7,9 @@ import (
 )
 
 type User struct {
-	ID   int64  `db:"id"`
-	Name string `db:"name"`
+	ID     int64  `db:"id"`
+	Email  string `db:"email"`
+	HashPW string `db:"hash_pw" json:"-"`
 }
 
 func NewUser() attache.Record { return new(User) }
@@ -22,8 +23,8 @@ func (m *User) Key() (columns []string, values []interface{}) {
 }
 
 func (m *User) Insert() (columns []string, values []interface{}) {
-	columns = []string{"name"}
-	values = []interface{}{m.Name}
+	columns = []string{"email", "hash_pw"}
+	values = []interface{}{m.Email, m.HashPW}
 	return
 }
 
@@ -36,7 +37,7 @@ func (m *User) AfterInsert(result sql.Result) {
 }
 
 func (m *User) Update() (columns []string, values []interface{}) {
-	columns = []string{"name"}
-	values = []interface{}{m.Name}
+	columns = []string{"email", "hash_pw"}
+	values = []interface{}{m.Email, m.HashPW}
 	return
 }

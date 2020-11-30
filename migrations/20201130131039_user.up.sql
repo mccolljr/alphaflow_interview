@@ -1,0 +1,5 @@
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    email VARCHAR(256) NOT NULL UNIQUE,
+    hash_pw VARCHAR(256) NOT NULL
+);
